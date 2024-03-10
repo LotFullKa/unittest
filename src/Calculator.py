@@ -6,15 +6,15 @@ class Calculator:
         pass
   
     def add(self, x1, x2):
-        pass
+        return x1 + x2
     
     def multiply(self, x1, x2):
-        pass
+        return x1 * x2
         
 
     def subtract(self, x1, x2):      
-        pass
+        return x1 - x2
     
     
     def divide(self, x1, x2):
-        pass
+        return x1 / x2

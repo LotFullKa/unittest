@@ -18,6 +18,18 @@ class TestCalculator(unittest.TestCase):
     # метод теста должен начинаться с "test_"
     def test_add(self):
         self.assertEqual(self.calculator.add(4, 7), 11)
+    
+    def test_cumsum(self):
+        for i in range(0, 10):
+            f"""test the sum from 0 to {i}"""
+            with self.subTest(i=i):
+                summ = 0
+                for k in range(i):
+                    summ = self.calculator.add(summ, k)
+                if i != 2:
+                    self.assertEqual(summ, i*(i-1)/2, "wrong sum in cumulutive sum")
+                else:
+                    self.assertEqual(summ, 0, "bad iteartion")
 
     @unittest.skipIf(Calculator.__version__ < (1, 3), "not supported in this library version")
     def test_subtract(self):
