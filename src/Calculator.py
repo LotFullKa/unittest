@@ -1,5 +1,6 @@
 #A simple calculator
 class Calculator:
+    __version__ = (0, 9)
     #empty constructor
     def __init__(self):
         pass

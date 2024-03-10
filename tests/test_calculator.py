@@ -19,9 +19,11 @@ class TestCalculator(unittest.TestCase):
     def test_add(self):
         self.assertEqual(self.calculator.add(4, 7), 11)
 
+    @unittest.skipIf(Calculator.__version__ < (1, 3), "not supported in this library version")
     def test_subtract(self):
         self.assertEqual(self.calculator.subtract(10, 5), 5)
 
+    @unittest.skip("demonstrating skipping")
     def test_multiply(self):
         self.assertEqual(self.calculator.multiply(3, 7), 21)
 

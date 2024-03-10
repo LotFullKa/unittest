@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import MagicMock, patch
 
 from src.Geometry import Point, Flate
 
@@ -56,7 +57,17 @@ class TestPoint(unittest.TestCase):
         self.assertTrue(str(self.C) == "(5.0, 6.0)", "Неправильный вывод на экран!!!")
         self.assertTrue(str(self.D) == "(-5.0, -6.0)", "Неправильный вывод на экран!!!")
 
+    # Давайте посмотрим на то как работают Mock
     def test_eq(self):
+        # Предположим что у точки есть цвет
+        # Замокаем этот метод
+        self.A.color = MagicMock(return_value='red')
+        
+        self.assertEqual(
+            self.A.color(),
+            'red'
+        )
+        
         self.assertTrue(
             self.A == self.C,
             "Данные две точки равны, а в результате тестирования, они оказались неравными!!!",
@@ -69,8 +80,16 @@ class TestPoint(unittest.TestCase):
             self.A == self.D,
             "Данные две точки неравны, а в результате тестирования, они оказались равными!!!",
         )
-
-    def test_ne(self):
+    
+    # Предположим нам надо замокать целый класс или другой объект
+    # Замокаем существующий класс
+    @patch('src.Geometry.Flate', some_atribute = '[[]]')
+    def test_ne(self, Flate_mock):
+        # Можем обращаться к его методам
+        Flate_mock(1).place_point(self.A)
+        print(Flate_mock.some_atribute)
+        
+        
         self.assertFalse(
             self.A != self.C,
             "Данные две точки равны, а в результате тестирования, они оказались неравными!!!",
@@ -83,4 +102,3 @@ class TestPoint(unittest.TestCase):
             self.A != self.D,
             "Данные две точки неравны, а в результате тестирования, они оказались равными!!!",
         )
-
