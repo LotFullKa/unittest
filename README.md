@@ -29,3 +29,13 @@ tests:
 Иногда при тестировании функционала нам требуется контролируемый ответ от серды исполнения.
 Для таких целей существует `Mock` (см. tests/test_geometry.py)
 
+
+## Покрытие кода
+Для оценки покрытия кода в unittest мы будем использовать `nose`
+    
+    sudo apt install python3-nose
+    pip install coverage
+
+Для того чтобы узнать процент покрытия проекта тестами
+
+    nosetests3 --with-coverage --cover-erase
