@@ -5,30 +5,31 @@ from src.Geometry import Point, Flate
 
 # Наследуемся от unittest.TestCase
 class TestPoint(unittest.TestCase):
-    
+
     # Запускается перед выполнением класса
-    def setUpClass():
-        print('\nНачинаем прогон test Point\n')
+    @classmethod
+    def setUpClass(cls):
+        print("\nНачинаем прогон test Point\n")
     
     # Запускается после выполнения класса
-    def tearDownClass():
-        print('\nЗакончили прогон test Point\n')
-    
-    # Запускается перед каждым тестом класса 
+    @classmethod
+    def tearDownClass(cls):
+        print("\nЗакончили прогон test Point\n")
+
+    # Запускается перед каждым тестом класса
     def setUp(self):
         self.A = Point(5, 6)
         self.B = Point(6, 10)
         self.C = Point(5.0, 6.0)
         self.D = Point(-5, -6)
-        
-    
+
     # Запускается после каждого теста класса
     def tearDown(self) -> None:
         del self.A
         del self.B
         del self.C
         del self.D
-    
+
     def test_init(self):
         self.assertEqual(
             (self.A.x, self.A.y),
@@ -61,13 +62,10 @@ class TestPoint(unittest.TestCase):
     def test_eq(self):
         # Предположим что у точки есть цвет
         # Замокаем этот метод
-        self.A.color = MagicMock(return_value='red')
-        
-        self.assertEqual(
-            self.A.color(),
-            'red'
-        )
-        
+        self.A.color = MagicMock(return_value="red")
+
+        self.assertEqual(self.A.color(), "red")
+
         self.assertTrue(
             self.A == self.C,
             "Данные две точки равны, а в результате тестирования, они оказались неравными!!!",
@@ -80,16 +78,15 @@ class TestPoint(unittest.TestCase):
             self.A == self.D,
             "Данные две точки неравны, а в результате тестирования, они оказались равными!!!",
         )
-    
+
     # Предположим нам надо замокать целый класс или другой объект
     # Замокаем существующий класс
-    @patch('src.Geometry.Flate', some_atribute = '[[]]')
+    @patch("src.Geometry.Flate", some_atribute="[[]]")
     def test_ne(self, Flate_mock):
         # Можем обращаться к его методам
         Flate_mock(1).place_point(self.A)
         print(Flate_mock.some_atribute)
-        
-        
+
         self.assertFalse(
             self.A != self.C,
             "Данные две точки равны, а в результате тестирования, они оказались неравными!!!",
